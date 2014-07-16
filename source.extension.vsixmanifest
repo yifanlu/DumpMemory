@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
   <Identifier Id="853d08ac-7acc-4887-8e2f-faf040db2c11">
-    <Name>DumpMemory</Name>
+    <Name>Dump Memory</Name>
     <Author>Yifan Lu</Author>
     <Version>1.0</Version>
     <Description xml:space="preserve">Dump and load from debug target memory.</Description>
