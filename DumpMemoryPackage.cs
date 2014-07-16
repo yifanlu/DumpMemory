@@ -100,8 +100,13 @@ namespace YifanLu.DumpMemory
             }
 
             // Pass a reference to the debugger for the view model
-            _dumpMemory.IsDebugging = _dte != null && (_dte.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode);
             _dumpMemory.VsDebugger = debugger;
+
+            // Add event handler if we are already in debugger
+            if (_dte.Debugger.CurrentMode == dbgDebugMode.dbgBreakMode)
+            {
+                DTEEvents_ModeChanged(vsIDEMode.vsIDEModeDesign);
+            }
         }
 
         #endregion
@@ -124,12 +129,12 @@ namespace YifanLu.DumpMemory
         /// </summary>
         private void DTEEvents_ModeChanged(vsIDEMode lastMode)
         {
+            if (_dumpMemory != null)
+            {
+                _dumpMemory.IsDebugging = (lastMode != vsIDEMode.vsIDEModeDebug);
+            }
             if (lastMode == vsIDEMode.vsIDEModeDebug)
             {
-                if (_dumpMemory != null)
-                {
-                    _dumpMemory.IsDebugging = false;
-                }
                 _dte.Events.DebuggerEvents.OnContextChanged -= DebuggerEvents_OnContextChanged;
                 _dte.Events.DebuggerEvents.OnEnterBreakMode -= DebuggerEvents_OnEnterBreakMode;
                 _dte.Events.DebuggerEvents.OnEnterDesignMode -= DebuggerEvents_OnEnterRunMode;
